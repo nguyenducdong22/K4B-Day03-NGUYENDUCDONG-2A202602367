@@ -1,0 +1,37 @@
+[
+  {
+    "id": "TC01",
+    "type": "direct_query",
+    "question": "Chào bạn, bạn có thể giới thiệu quy trình sàng lọc hồ sơ CV và các tiêu chí tuyển dụng chung của công ty không?",
+    "expected_behavior": "Chatbot trả lời trực tiếp từ System Prompt, giải thích quy trình sàng lọc CV và tuyển dụng mà không cần gọi bất kỳ Tool nào.",
+    "complexity": "Low"
+  },
+  {
+    "id": "TC02",
+    "type": "single_tool_query",
+    "question": "Hãy tra cứu thông tin hồ sơ, điểm đánh giá CV và kết quả sàng lọc của ứng viên UV2026001.",
+    "expected_behavior": "Agent nhận diện nhu cầu tra cứu hồ sơ ứng viên, tự động phát sinh Tool Call 'candidate_query' với mã UV2026001.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC03",
+    "type": "appointment_booking",
+    "question": "Hãy gửi thông báo mời phỏng vấn cho ứng viên UV2026001 vào lúc 14:00 ngày 20/09/2026 với người phỏng vấn Trưởng phòng Nhân sự.",
+    "expected_behavior": "Agent tự động phát sinh Tool Call 'schedule_interview' với đúng thời gian, mã ứng viên và người phỏng vấn phụ trách.",
+    "complexity": "Medium"
+  },
+  {
+    "id": "TC04",
+    "type": "multi_step_reasoning",
+    "question": "Hãy kiểm tra thông tin của ứng viên UV2026001, xem ứng viên ứng tuyển vị trí nào và nếu kết quả sàng lọc CV đạt yêu cầu thì hãy gửi thông báo mời phỏng vấn vào lúc 09:00 ngày 25/09/2026.",
+    "expected_behavior": "Agent thực hiện chuỗi suy luận ReAct đa bước: Tra cứu hồ sơ ứng viên trước, xác nhận đạt tiêu chí tuyển dụng, sau đó tiến hành gửi thông báo lịch phỏng vấn.",
+    "complexity": "High"
+  },
+  {
+    "id": "TC05",
+    "type": "edge_case_handling",
+    "question": "Hãy tra cứu thông tin hồ sơ và kết quả sàng lọc CV của ứng viên có mã số UV9999999.",
+    "expected_behavior": "Agent nhận kết quả NOT_FOUND từ Tool và đưa ra phản hồi lịch sự, thông báo không tìm thấy hồ sơ, không bịa đặt dữ liệu (Anti-Hallucination).",
+    "complexity": "Medium"
+  }
+]

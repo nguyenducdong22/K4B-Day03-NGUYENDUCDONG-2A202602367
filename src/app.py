@@ -117,23 +117,20 @@ def run_react_agent(user_query: str, provider, mcp_server: MCPAcademicServer) ->
                 obs_str = json.dumps(obs_data, ensure_ascii=False)
                 print(f"👁️ [Observation từ MCP Server]: {obs_str}")
                 
-                # Tổng hợp Final Answer từ kết quả Observation thực tế
-                if obs_data.get("status") == "SUCCESS":
-                    if "data" in obs_data:
-                        d = obs_data["data"]
-                        final_answer = (
-                            f"Kết quả tra cứu cho sinh viên {obs_data.get('student_id', '')} ({d.get('full_name', '')}): "
-                            f"Lớp {d.get('class', '')}, GPA: {d.get('gpa', '')}, Email: {d.get('email', '')}, "
-                            f"Trạng thái: {d.get('status', '')}, Cố vấn: {d.get('advisor', '')}."
-                        )
-                    elif "message" in obs_data:
-                        final_answer = obs_data["message"]
-                    else:
-                        final_answer = f"Đã hoàn tất xử lý qua MCP Server: {json.dumps(obs_data, ensure_ascii=False)}"
-                elif obs_data.get("status") == "NOT_FOUND":
-                    final_answer = obs_data.get("message", "Không tìm thấy thông tin sinh viên yêu cầu.")
-                else:
-                    final_answer = f"Phản hồi từ công cụ: {json.dumps(obs_data, ensure_ascii=False)}"
+                # [RE-ACT LOOP]: Chuyển Observation về LLM Model để LLM tự suy luận và tổng hợp Final Answer
+                print(f"🧠 [Thought]: Đã nhận dữ liệu từ MCP Server. Đang chuyển kết quả về cho LLM ({provider.__class__.__name__}) tự sinh phản hồi...")
+                obs_prompt = (
+                    f"Câu hỏi của người dùng: \"{user_query}\"\n\n"
+                    f"Kết quả thực thi từ công cụ '{tool_name}' (Observation):\n"
+                    f"{obs_str}\n\n"
+                    f"Dựa trên kết quả thực tế trên, hãy trả lời câu hỏi của người dùng một cách chi tiết, chuyên nghiệp và chính xác (không bịa đặt thêm thông tin ngoài kết quả)."
+                )
+                gen_start = time.time()
+                try:
+                    final_answer = provider.generate(obs_prompt, system_prompt=REACT_AGENT_SYSTEM_PROMPT)
+                except Exception as e:
+                    final_answer = obs_data.get("message", f"Kết quả thực thi: {obs_str}")
+                gen_latency = round((time.time() - gen_start) * 1000, 2)
             
             trace_logs.append({
                 "step": step,
@@ -153,9 +150,9 @@ def run_react_agent(user_query: str, provider, mcp_server: MCPAcademicServer) ->
                 "step": step + 1,
                 "query": user_query,
                 "action_type": "FINAL_ANSWER",
-                "thought": "Tổng hợp kết quả từ MCP Server thành công.",
+                "thought": "Mô hình LLM phân tích kết quả từ MCP Server và sinh câu trả lời hoàn chỉnh.",
                 "output": final_answer,
-                "latency_ms": 10.0
+                "latency_ms": gen_latency
             })
             break
 

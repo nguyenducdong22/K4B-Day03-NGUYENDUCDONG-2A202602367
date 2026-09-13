@@ -1,29 +1,10 @@
 [
   {
     "step": 1,
-    "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
+    "query": "Nếu một ứng viên có 5 năm làm Java nhưng chưa biết Python thì công ty có nhận vào vị trí AI Engineer không?",
     "action_type": "FINAL_ANSWER",
-    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
-    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-    "latency_ms": 2845.93
-  },
-  {
-    "step": 1,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
-    "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
-    "arguments": {
-      "student_id": "SV2026001"
-    },
-    "observation": {},
-    "latency_ms": 799.12
-  },
-  {
-    "step": 2,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
-    "output": "Chưa thể trả lời chi tiết do chưa nhận được dữ liệu từ MCP Server (hãy hoàn thành TODO 2.1).",
-    "latency_ms": 10.0
+    "thought": "The user asks: \"Nếu một ứng viên có 5 năm làm Java nhưng chưa biết Python thì công ty có nhận vào vị trí AI Engineer không?\" They ask about hiring decision criteria. This is a general recruitment knowledge question, not needing real-time data. So answer based on typical hiring for AI Engineer: need Python, ML frameworks, etc. Explain that lack of Python is a drawback, but possible if they have strong Java and ML experience, transferable skills, willingness to learn. Provide advice. No tool call needed.",
+    "output": "**Câu trả lời ngắn gọn:**  \nTrong hầu hết các công ty, vị trí **AI Engineer** yêu cầu ít nhất **kiến thức và kinh nghiệm thực tế với Python** (vì Python là ngôn ngữ chủ đạo cho hầu hết các thư viện Machine Learning/Deep Learning như TensorFlow, PyTorch, scikit‑learn, …). Vì vậy, một ứng viên chỉ có 5 năm kinh nghiệm làm Java mà chưa biết Python sẽ gặp **khó khăn** trong việc được nhận ngay cho vị trí này, trừ khi có các yếu tố bù đắp mạnh mẽ khác.\n\n---\n\n## Giải thích chi tiết\n\n| Yếu tố | Tại sao quan trọng đối với AI Engineer |\n|--------|----------------------------------------|\n| **Python** | - Thư viện ML/DL (TensorFlow, PyTorch, Keras, scikit‑learn, …) hầu hết đều viết bằng Python và có API thân thiện.<br>- Hệ sinh thái data processing (pandas, NumPy, Dask) và visualisation (matplotlib, seaborn, plotly) được tối ưu cho Python.<br>- Nhiều tutorial, mẫu code, và cộng đồng hỗ trợ lớn. |\n| **Kiến thức Machine Learning / Deep Learning** | Kiến thức về thuật toán, mô hình, đánh giá, tuning… là cốt lõi. Nếu ứng viên đã thực hiện các dự án AI bằng Java (ví dụ: Deeplearning4j, Weka, hoặc các dịch vụ cloud), đó là điểm cộng, nhưng vẫn thường cần “đổi ngôn ngữ” sang Python để làm việc hiệu quả hơn trong môi trường đa dạng. |\n| **Kinh nghiệm thực tế (project)** | Các dự án thực tế (có dữ liệu, training, deployment) giúp chứng minh khả năng áp dụng kiến thức. Nếu dự án AI đã thực hiện bằng Java, công ty có thể xem xét, nhưng sẽ phải đánh giá mức độ phức tạp và khả năng chuyển đổi. |\n| **Khả năng học nhanh / học hỏi công nghệ mới** | Công nghệ AI thay đổi nhanh, vì vậy nhà tuyển dụng thường đánh giá “learnability”. Một người có 5 năm kinh nghiệm Java và tinh thần tự học có thể được xem là tiềm năng nếu họ cam kết học Python nhanh chóng. |\n| **Độ phù hợp với đội ngũ hiện tại** | Nếu đội ngũ AI Engineer hiện tại chủ yếu làm việc bằng Python, việc đưa một người chỉ biết Java vào có thể gây “friction” trong việc chia sẻ code, review, và duy trì dự án. |\n\n---\n\n## Các kịch bản thực tế\n\n1. **Ứng viên có 5 năm Java **và** đã làm các dự án AI bằng Java (Deeplearning4j, Spark MLlib, …)**\n   - **Có khả năng được nhận** nếu công ty có nhu cầu hoặc đang phát triển giải pháp AI trên nền Java, hoặc nếu họ sẵn sàng đầu tư",
+    "latency_ms": 3998.6
   }
 ]
